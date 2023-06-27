@@ -23,7 +23,12 @@ function graphplotter(hours) {
     var layout = {
         barmode: 'stack',
         title: "How hours worked affect finances",
-        yaxis: { range: [0, 2500] },
+        yaxis: {
+            range: [0, 2500],
+            title: {
+                text: 'Annual Earnings (£)',
+            }
+        },
         shapes: [
             {
                 type: 'line',
