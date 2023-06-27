@@ -28,31 +28,31 @@ var taxrate = [.22, .22, .20, .20, .20, .20, .20, .20, .20, .20, .20, .20, .20, 
 
 var nationalinsurancemin = [97, 100, 105, 110, 110, 139, 146, 149, 153, 155, 155, 157, 162, 166, 183, 184, 190];
 
-var nationalinsurancerate = [0.11, 0.11, 0.11, 0.11, 0.11, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12];
+var nationalinsurancerate = [0.11, 0.11, 0.11, 0.11, 0.11, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12];
 
 var weeklyearnings = []
-for (let i = 0; i <= minimumwage.length; i++) {
+for (let i = 0; i < minimumwage.length; i++) {
     weeklyearnings.push(minimumwage[i] * 40)
 }
 
 var nationalinsurancedeductions = []
 
-for (let i = 0; i <= nationalinsurancemin.length; i++) {
+for (let i = 0; i < nationalinsurancemin.length; i++) {
     nationalinsurancedeductions.push(((weeklyearnings[i] - nationalinsurancemin[i]) * nationalinsurancerate[i]) * 52);
 }
 
 var taxdeductions = []
 
-for (let i = 0; i <= minimumwage.length; i++) {
+for (let i = 0; i < minimumwage.length; i++) {
     taxdeductions.push(((minimumwage[i] * 50 * 52 - allowance[i]) * taxrate[i]));
 }
 var combineddeudctions = []
-for (let i = 0; i <= minimumwage.length; i++) {
+for (let i = 0; i < minimumwage.length; i++) {
     combineddeudctions.push(nationalinsurancedeductions[i] + taxdeductions[i])
 }
 
 var minwageearnings = []
-for (let i = 0; i <= minimumwage.length; i++) {
+for (let i = 0; i < minimumwage.length; i++) {
     minwageearnings.push(weeklyearnings[i] * 52 - combineddeudctions[i])
 }
 
@@ -89,7 +89,12 @@ var layout = {
         }
     }
 };
-
 var data = [stipend, minwage];
+console.log(weeklyearnings)
 
+console.log(nationalinsurancedeductions)
+console.log(combineddeudctions)
+console.log(taxdeductions)
+console.log(minwageearnings)
+console.log(yeararray)
 Plotly.newPlot('mincomp', data, layout);
