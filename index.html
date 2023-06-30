@@ -53,19 +53,18 @@
 
             <div id="chart" class="chart"></div>
             <div class="slidecontainer">
-                <input type="range" min="0" max="10" value="5" class="slider" id="myRange" ,
-                    onchange="graphplotter(this.value, globalstipend)">
+                <input type="range" min="0" max="10" value="5" class="slider" id="hours" , onchange="graphplotter()">
             </div>
 
             <div class="sliderlabel" id="demo"></div>
         </form>
 
 
-        <div id="piechart"></div>
+        <div id="piechart" class="chart"></div>
 
 
         <div class="slidecontainer">
-            <input type="range" min="17400" max="30000" , value="17400" class="slider" id="myRange2" ,
+            <input type="range" min="17400" max="30000" , value="17400" class="slider" id="stipendrate" ,
                 onchange="doubleupdater(globalhours,this.value)">
         </div>
 
@@ -97,12 +96,12 @@
 <script src="js/doublegraphupdater.js"></script>
 
 <script>
-    var slider = document.getElementById("myRange");
+    var slider = document.getElementById("hours");
     graphplotter(slider.value);
 </script>
 
 <script>
-    var slider2 = document.getElementById("myRange2");
+    var slider2 = document.getElementById("stipendrate");
     doubleupdater(globalhours, slider2.value);
 </script>
 

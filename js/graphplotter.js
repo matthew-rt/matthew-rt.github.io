@@ -1,9 +1,9 @@
-function graphplotter(hours, stipendrate) {
-    var slider = document.getElementById("myRange");
+function graphplotter() {
+    var slider = document.getElementById("hours");
     var output = document.getElementById("demo");
 
-    globalstipend = stipendrate;
-    globalhours = hours;
+    var stipendrate = document.getElementById("stipendrate").value;
+    var hours = slider.value;
     output.innerHTML = slider.value.concat(" hours");
     slider.oninput = function () {
         output.innerHTML = this.value.concat(" hours");
