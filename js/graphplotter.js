@@ -1,15 +1,17 @@
-function graphplotter(hours) {
+function graphplotter(hours, stipendrate) {
     var slider = document.getElementById("myRange");
     var output = document.getElementById("demo");
 
+    globalstipend = stipendrate;
+    globalhours = hours;
     output.innerHTML = slider.value.concat(" hours");
     slider.oninput = function () {
         output.innerHTML = this.value.concat(" hours");
     }
 
-    var stipend = {
+    var stipendpart = {
         x: ["Fully funded", "Part time", "Unfunded"],
-        y: [1472, 736, 0],
+        y: [stipendrate / 12, stipendrate / 24, 0],
         name: "Stipend",
         type: "bar"
     }
@@ -19,7 +21,7 @@ function graphplotter(hours) {
         name: "Earnings",
         type: "bar"
     }
-    var data = [stipend, earnings];
+    var data = [stipendpart, earnings];
     var layout = {
         barmode: 'stack',
         title: "How hours worked affect finances",
