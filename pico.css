@@ -87,6 +87,22 @@
   color: #555;
 }
 
+#infoexplorer {
+  width: 800px;
+  height: 200px;
+  background-color: lightgray;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 25%);
+
+}
+
 .legend i {
   width: 18px;
   height: 18px;
