@@ -99,7 +99,7 @@
 
 		<div class="slidecontainer">
 			<input type="range" min="17400" max="30000" , value="17400" class="slider" id="stipendrate" ,
-				onchange="doubleupdater(globalhours,this.value)">
+				onchange="doubleupdater()">
 		</div>
 
 		<div class="sliderlabel" id="demo2"></div>
@@ -115,10 +115,6 @@
 
 </body>
 
-<script>
-	var globalhours = 5
-	var globalstipend = 17400
-</script>
 
 <script>
 	var housepath = document.getElementById("housepath");
@@ -155,7 +151,8 @@
 
 <script>
 	var slider2 = document.getElementById("stipendrate");
-	doubleupdater(globalhours, slider2.value);
+	var hours = slider.value;
+	doubleupdater(hours, slider2.value);
 </script>
 
 
