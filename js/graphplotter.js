@@ -8,7 +8,6 @@ function graphplotter() {
     slider.oninput = function () {
         output.innerHTML = this.value.concat(" hours");
     }
-
     var stipendpart = {
         x: ["Fully funded", "Part time", "Unfunded"],
         y: [stipendrate / 12, stipendrate / 24, 0],
