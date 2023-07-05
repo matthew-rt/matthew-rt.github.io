@@ -16,11 +16,11 @@ var tiles = L.tileLayer('https://{s}.tile.thunderforest.com/pioneer/{z}/{x}/{y}.
     maxZoom: 22
 }).addTo(map);
 
-L.tileLayer('https://{s}.tile.thunderforest.com/pioneer/{z}/{x}/{y}.png?apikey={apikey}', {
-    attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    apikey: 'd16f8ecc79e64e5586fcbb382b39d080',
-    maxZoom: 22
-});
+// L.tileLayer('https://{s}.tile.thunderforest.com/pioneer/{z}/{x}/{y}.png?apikey={apikey}', {
+//     attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+//     apikey: 'd16f8ecc79e64e5586fcbb382b39d080',
+//     maxZoom: 22
+// });
 var info = L.control();
 
 info.onAdd = function (map) {
