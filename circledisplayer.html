@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+
+<head>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <style>
+        body {
+            background-color: rgb(191, 150, 108);
+        }
+
+        .container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+
+        #circle {
+            position: absolute;
+            top: 50%;
+            left: -10%;
+            transform: translate(0%, 0%);
+            border-radius: 50%;
+            background-color: blue;
+        }
+
+        .job-boxes {
+            display: flex;
+            position: fixed;
+            bottom: 50%;
+            left: 10%;
+
+            margin-top: 20px;
+        }
+
+        .job-box {
+            padding: 10px;
+            background-color: lightgray;
+            cursor: pointer;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="chart"></div>
+    </div>
+
+    <div class="job-boxes">
+        <div class="job-box" onclick="circleplotter(1)">Job 1</div>
+        <div class="job-box" onclick="circleplotter(1.2)">Job 2</div>
+        <div class="job-box" onclick="circleplotter(0.8)">Job 3</div>
+        <!-- Add more job boxes here -->
+    </div>
+
+</body>
+
+<script>
+    function circleplotter(radiusscaler) {
+        var trace1 = {
+        };
+
+        var circle1center = [1.25, 2];
+        var circle2center = [2.8, 2];
+
+        var circle1radius = radiusscaler * 1.2;
+        var circle2radius = 0.6;
+        var layout = {
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            xaxis: {
+                range: [0, 9],
+                zeroline: false,
+                gridwidth: 0,
+                showgrid: false,
+                visible: false,
+            },
+            yaxis: {
+                range: [0, 4.5],
+                zeroline: false,
+                gridwidth: 0,
+                showgrid: false,
+                visible: false,
+            },
+            width: 1000,
+            height: 500,
+            shapes: [
+
+                // Unfilled Circle
+
+                {
+                    type: 'circle',
+                    xref: 'x',
+                    yref: 'y',
+                    fillcolor: 'rgba(92, 93, 124,1)',
+                    x0: circle1center[0] - circle1radius,
+                    y0: circle1center[1] - circle1radius,
+                    x1: circle1center[0] + circle1radius,
+                    y1: circle1center[1] + circle1radius,
+                    line: {
+                        color: 'rgba(54, 54, 73,1)'
+                    }
+                },
+
+                // Filled Circle
+
+                {
+                    type: 'circle',
+                    xref: 'x',
+                    yref: 'y',
+                    fillcolor: 'rgba(92, 93, 124,1)',
+                    x0: circle2center[0] - circle2radius,
+                    y0: circle2center[1] - circle2radius,
+                    x1: circle2center[0] + circle2radius,
+                    y1: circle2center[1] + circle2radius,
+                    line: {
+                        color: 'rgba(54, 54, 73,1)'
+                    }
+                }
+            ]
+        };
+
+
+        var config = {
+            displayModeBar: false,
+            responsive: true,
+            showTips: false,
+            staticPlot: true,
+        };
+        var data = [trace1];
+
+        Plotly.newPlot('chart', data, layout, config);
+    }
+</script>
+
+
+</html>

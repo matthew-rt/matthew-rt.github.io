@@ -32,7 +32,7 @@ info.onAdd = function (map) {
 // method that we will use to update the control based on feature properties passed
 info.update = function (props) {
     this._div.innerHTML = '<h4>Average Rent</h4>' + (props ?
-        '<b>' + props.cmwd11nm + '</b><br />' + '£' + props.average_rent + ' per month'
+        '' + props.cmwd11nm + '<br />' + '£' + props.average_rent + ' per month'
         : 'Hover over a Hover');
 };
 

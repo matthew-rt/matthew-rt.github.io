@@ -1,159 +1,305 @@
-<!doctype html>
+<!DOCTYPE HTML>
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
 
-
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title> Cost of living survey</title>
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-		integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-	<link rel="stylesheet" href="pico.css">
-
-	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-		integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+	<title>PGR cost of living survey</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" />
+	</noscript>
 	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="js/leaflet.ajax.min.js"></script>
-	<script>
-		var layout = {
-			title: "How hours worked affect finances",
-			showlegend: true
-		};
-		function cb(selection) {
-			$.getJSON({
-				url: "/callback", data: { 'data': selection }, success: function (result) {
-					Plotly.newPlot('chart', result, layout);;
-				}
-			});
-		}
-	</script>
-
 </head>
 
+<body class="is-preload">
 
-
-<body>
-
-	<section id="header">
-		<div class="container">
-			<h1>Cost of living survey</h1>
+	<!-- Sidebar -->
+	<section id="sidebar">
+		<div class="inner">
+			<nav>
+				<ul>
+					<li><a href="#intro">Welcome</a></li>
+					<li><a href="#one">Key findings</a></li>
+					<li><a href="#two">Explore the data</a></li>
+					<li><a href="#three">Get in touch</a></li>
+				</ul>
+			</nav>
 		</div>
 	</section>
 
+	<!-- Wrapper -->
+	<div id="wrapper">
 
-	<div class="grid">
-		<div>
-			<svg>
-				<path
-					style="opacity:1;stroke-width:0.9;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-					d="M 61.202783,149.33517 V 126.8795 l -5.29128,5.29128 20.605879,-20.60589 20.562861,20.56287 -5.29128,-5.29128 v 22.58473 H 61.194822 Z m 2.212605,-24.66412 0.0076,-4.5476 h 2.859358 v 1.67303"
-					id="housepath" sodipodi:nodetypes="ccccccccccccc" stroke="rgb(46,64,69)" fill="rgb(46,64,69)" />
-			</svg>
-		</div>
-		<div>
-			<svg>
-				<path
-					style="opacity:1;stroke-width:0.9;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-					d="M 61.202783,149.33517 V 126.8795 l -5.29128,5.29128 20.605879,-20.60589 20.562861,20.56287 -5.29128,-5.29128 v 22.58473 H 61.194822 Z m 2.212605,-24.66412 0.0076,-4.5476 h 2.859358 v 1.67303"
-					id="billspath" sodipodi:nodetypes="ccccccccccccc" stroke="rgb(46,64,69)" fill="rgb(46,64,69)" />
-			</svg>
-		</div>
-		<div>
-			<svg>
-				<path
-					style="opacity:1;stroke-width:0.9;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-					d="M 61.202783,149.33517 V 126.8795 l -5.29128,5.29128 20.605879,-20.60589 20.562861,20.56287 -5.29128,-5.29128 v 22.58473 H 61.194822 Z m 2.212605,-24.66412 0.0076,-4.5476 h 2.859358 v 1.67303"
-					id="housepath2" sodipodi:nodetypes="ccccccccccccc" stroke="rgb(46,64,69)" fill="rgb(46,64,69)" />
-			</svg>
-		</div>
+		<!-- Intro -->
+		<section id="intro" class="wrapper style1 fullscreen fade-up">
+			<div class="inner">
+				<h1>Post Graduate Finance Survey</h1>
+				<p>A survey was conducted of more than 500 (insert number here) PhD students at the University of
+					Bristol.
+					Here's what we found. </p>
+			</div>
+		</section>
+
+		<!-- One -->
+		<section id="one" class="wrapper style2 spotlights">
+			<section>
+				<div id="circlechart"></div>
+				<div class="content">
+					<div class="inner">
+						<h2>Housing costs</h2>
+						<p>The average student pays '£750' a month in rent, and spends '£200' a month on bills.
+							International students and students with disablities face additional barriers to finding
+							housing.</p>
+						<!-- <ul class="actions">
+							<li><a href="generic.html" class="button">Learn more</a></li>
+						</ul> -->
+					</div>
+				</div>
+			</section>
+			<section>
+				<a href="#" class="image"><img src="images/pic02.jpg" alt="" data-position="top center" /></a>
+				<div class="content">
+					<div class="inner">
+						<h2>Work</h2>
+						<p>Most students work alongside their studies. For many students </p>
+						<ul class="actions">
+							<li><a href="generic.html" class="button">Learn more</a></li>
+						</ul>
+					</div>
+				</div>
+			</section>
+			<section>
+				<a href="#" class="image"><img src="images/pic03.jpg" alt="" data-position="25% 25%" /></a>
+				<div class="content">
+					<div class="inner">
+						<h2>Ultricies aliquam</h2>
+						<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies
+							erat malesuada quis. Aliquam dapibus.</p>
+						<ul class="actions">
+							<li><a href="generic.html" class="button">Learn more</a></li>
+						</ul>
+					</div>
+				</div>
+			</section>
+		</section>
+
+		<!-- Two -->
+		<section id="two" class="wrapper style3 fade-up">
+			<div class="inner">
+				<h2>Explore the data </h2>
+				<p>Click the icons below to view interactive figures, explore the data yourself, and model possible
+					solutions.</p>
+				<div class="features">
+					<section>
+						<a href="mappage.html"><span class="icon solid major fa-code"></span></a>
+						<h3>Rent Map</h3>
+						<p>Explore how average rent varies by neighbourhood</p>
+					</section>
+					<section>
+						<a href="circledisplay.html"><span class="icon solid major fa-lock"></span></a>
+						<h3>Borrowing impacts</h3>
+						<p>See how borrowing affects students</p>
+					</section>
+					<section>
+						<span class="icon solid major fa-cog"></span>
+						<h3>Experiment with the data yourself </h3>
+						<p>Plot categories against one another to see trends</p>
+					</section>
+					<section>
+						<span class="icon solid major fa-desktop"></span>
+						<h3>Stakeholder map</h3>
+						<p>Visualise the major stakeholders</p>
+					</section>
+					<section>
+						<span class="icon solid major fa-link"></span>
+						<h3>Model different policy decisions</h3>
+						<p>How could the financial situation of PGRs be improved?</p>
+					</section>
+					<section>
+						<span class="icon major fa-gem"></span>
+						<h3>Read some testimonials</h3>
+						<p>Read some quotes from those that completed the survey</p>
+					</section>
+				</div>
+				<ul class="actions">
+					<li><a href="generic.html" class="button">Learn more</a></li>
+				</ul>
+			</div>
+		</section>
+
+		<!-- Three -->
+		<section id="three" class="wrapper style1 fade-up">
+			<div class="inner">
+				<h2>Get in touch</h2>
+				<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat
+					malesuada quis. Aliquam dapibus, lacus eget hendrerit bibendum, urna est aliquam sem, sit amet
+					imperdiet est velit quis lorem.</p>
+				<div class="split style1">
+					<section>
+						<form method="post" action="#">
+							<div class="fields">
+								<div class="field half">
+									<label for="name">Name</label>
+									<input type="text" name="name" id="name" />
+								</div>
+								<div class="field half">
+									<label for="email">Email</label>
+									<input type="text" name="email" id="email" />
+								</div>
+								<div class="field">
+									<label for="message">Message</label>
+									<textarea name="message" id="message" rows="5"></textarea>
+								</div>
+							</div>
+							<ul class="actions">
+								<li><a href="" class="button submit">Send Message</a></li>
+							</ul>
+						</form>
+					</section>
+					<section>
+						<ul class="contact">
+							<li>
+								<h3>Address</h3>
+								<span>12345 Somewhere Road #654<br />
+									Nashville, TN 00000-0000<br />
+									USA</span>
+							</li>
+							<li>
+								<h3>Email</h3>
+								<a href="#">user@untitled.tld</a>
+							</li>
+							<li>
+								<h3>Phone</h3>
+								<span>(000) 000-0000</span>
+							</li>
+							<li>
+								<h3>Social</h3>
+								<ul class="icons">
+									<li><a href="#" class="icon brands fa-twitter"><span
+												class="label">Twitter</span></a></li>
+									<li><a href="#" class="icon brands fa-facebook-f"><span
+												class="label">Facebook</span></a></li>
+									<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a>
+									</li>
+									<li><a href="#" class="icon brands fa-instagram"><span
+												class="label">Instagram</span></a></li>
+									<li><a href="#" class="icon brands fa-linkedin-in"><span
+												class="label">LinkedIn</span></a></li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+				</div>
+			</div>
+		</section>
+
 	</div>
 
-
-	<div id="infoexplorer">Hover over an icon</div>
-
-
-
-	<main class="container">
-		<div class="grid">
-			<div>
-				<h2>Rents in Bristol are among the highest in the UK. The average student pays £720 a month</h2>
-			</div>
-			<div id="map"> </div>
-
+	<!-- Footer -->
+	<footer id="footer" class="wrapper style1-alt">
+		<div class="inner">
+			<ul class="menu">
+				<li>&copy; Untitled. All rights reserved.</li>
+				<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+			</ul>
 		</div>
-		<form>
-			<!-- <h1>How hours worked affect finances</h1>
-        <h2>Set the hours worked per week</h2> -->
+	</footer>
 
-			<div id="chart" class="chart"></div>
-			<div class="slidecontainer">
-				<input type="range" min="0" max="10" value="5" class="slider" id="hours" , onchange="graphplotter()">
-			</div>
-
-			<div class="sliderlabel" id="demo"></div>
-		</form>
-
-
-		<div id="piechart" class="chart"></div>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
 
 
-		<div class="slidecontainer">
-			<input type="range" min="17400" max="30000" , value="17400" class="slider" id="stipendrate" ,
-				onchange="doubleupdater()">
-		</div>
+	<script>
+		var trace1 = {
+		};
 
-		<div class="sliderlabel" id="demo2"></div>
+		var circle1center = [1.25, 2];
+		var circle2center = [2.8, 2];
 
-
-	</main>
-
+		var stipend = 1700
 
 
-	<div id="mincomp"> </div>
+		var circle1radius = 1.5;
+		var circle2radius = 0.6;
+		var layout = {
+			paper_bgcolor: 'rgba(0,0,0,0)',
+			plot_bgcolor: 'rgba(0,0,0,0)',
+			xaxis: {
+				range: [0, 6],
+				zeroline: false,
+				gridwidth: 0,
+				showgrid: false,
+				visible: false,
+			},
+			yaxis: {
+				range: [0, 4],
+				zeroline: false,
+				gridwidth: 0,
+				showgrid: false,
+				visible: false,
+			},
+			width: 600,
+			height: 400,
+			shapes: [
+
+				// Unfilled Circle
+
+				{
+					type: 'circle',
+					xref: 'x',
+					yref: 'y',
+					fillcolor: 'rgba(92, 93, 124,1)',
+					x0: circle1center[0] - circle1radius,
+					y0: circle1center[1] - circle1radius,
+					x1: circle1center[0] + circle1radius,
+					y1: circle1center[1] + circle1radius,
+					line: {
+						color: 'rgba(54, 54, 73,1)'
+					}
+				},
+
+				// Filled Circle
+
+				{
+					type: 'circle',
+					xref: 'x',
+					yref: 'y',
+					fillcolor: 'rgba(92, 93, 124,1)',
+					x0: circle2center[0] - circle2radius,
+					y0: circle2center[1] - circle2radius,
+					x1: circle2center[0] + circle2radius,
+					y1: circle2center[1] + circle2radius,
+					line: {
+						color: 'rgba(54, 54, 73,1)'
+					}
+				}
+			]
+		};
 
 
+		var config = {
+			displayModeBar: false,
+			responsive: true,
+			showTips: false,
+			staticPlot: true,
+		};
+		var data = [trace1];
+
+		Plotly.newPlot('circlechart', data, layout, config);
+	</script>
 
 </body>
-
-
-<script>
-	var housepath = document.getElementById("housepath");
-	var originalhousepath = housepath.getAttribute("fill");
-	var infoDiv = document.getElementById("infoexplorer");
-	var number = 750;
-	housepath.addEventListener("mouseover", function (event) {
-		housepath.setAttribute("fill", "rgb(131,173,181)");
-		housepath.setAttribute("stroke", "rgb(131,173,181)");
-		housepath.textContent = number;
-		infoDiv.innerHTML = "The average student pays £740 a month";
-	}, false);
-	housepath.addEventListener("mouseout", function (event) {
-		housepath.setAttribute("fill", originalhousepath);
-		housepath.setAttribute("stroke", originalhousepath);
-		housepath.textContent = "";
-		infoDiv.innerHTML = "Hover over an icon";
-	}, false);
-
-</script>
-
-<script src="js/graphplotter.js"></script>
-
-<script src="js/mapscript.js"></script>
-
-<script src="js/minwagegraph.js"></script>
-<script src="js/piechart.js"></script>
-<script src="js/doublegraphupdater.js"></script>
-
-<script>
-	var slider = document.getElementById("hours");
-	graphplotter(slider.value);
-</script>
-
-<script>
-	var slider2 = document.getElementById("stipendrate");
-	var hours = slider.value;
-	doubleupdater(hours, slider2.value);
-</script>
-
 
 </html>
