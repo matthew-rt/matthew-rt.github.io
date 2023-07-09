@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>Solution Modeller</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" />
+	</noscript>
+	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+</head>
+
+<body class="is-preload">
+
+	<!-- Header -->
+	<header id="header">
+		<a href="index.html" class="title">PGR Finance</a>
+		<nav>
+			<ul>
+				<li><a href="index.html">Home</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Main -->
+		<section id="main" class="wrapper">
+			<div class="inner">
+				<h1 class="major">Solution Modeling</h1>
+				<section>
+					<h2>Paid work</h2>
+					<p>X% of Phd students surveyed perform teaching alongside their studies. Whilst x% of students state
+						that they work to gain experience,
+						X% of students state that they work to make ends meet. How would increasing the amount of paid
+						work students can do affect their finances? </p>
+					</p>
+					<div id="chart" class="chart"></div>
+					<div class="slidecontainer">
+						<input type="range" min="0" max="10" value="5" class="slider" id="hours" ,
+							onchange="graphplotter()">
+					</div>
+
+					<div class="sliderlabel" id="demo"></div>
+
+					<p>Working can provide some additional money, but this can come at a detriment to a student's
+						studies.
+						The number of hours on offer is limited: x% of students said they would work more hours if given
+						the opportunity.
+						However, even working 10 hours a weekend does not put a fully funded student above the ONS
+						affordable housing threshold </p>
+
+				</section>
+
+				<section>
+					<h2>Stipend Increase</h2>
+					<p>A stipend increase would be one way to improve the financial situation of PGRS. But who would
+						bear the increased cost?
+						UKRI is the largest funder of PhDs in the UK, funding more than 22,000 students a year. How
+						would changing the stipend affect their spending?
+					</p>
+
+
+					<div id="piechart" class="chart"></div>
+					<div class="slidecontainer">
+						<input type="range" min="17400" max="30000" , value="17400" class="slider" id="stipendrate" ,
+							onchange="doubleupdater()">
+					</div>
+					<div class="sliderlabel" id="demo2"></div>
+
+
+
+				</section>
+
+				<section>
+					<h2>Support from the University</h2>
+					<p>The University of Bristol has roughly 2200 postgraduate research students: this figure will
+						include both masters and PhD students. In 2022, the University of Bristol's financial statements
+						showed a profit of £55 million. Can the University afford to financially support its students?
+						<br>
+						The work of PhD students plays a vital role in the University's research output, which is
+						instrumental in acquiring grants and funding, which makes up 22% of the University's income.
+						Post graduate students also pay tuition fees, with an average of £5,600 per student. For funded
+						students, these tuition fees are covered by the funder: this money has already been allocated
+						for the student's education. If the University were to reduce tuition fees, and return this
+						money to students, what affect would it have on the finances of the student and University?
+
+					</p>
+					<div id="budgetpie" class="chart"></div>
+					<div class="slidecontainer">
+						<input type="range" min="0" max="5650" , value="5650" class="slider" id="TuitionFees" ,
+							onchange="bristolbudget()">
+					</div>
+					<div class="sliderlabel" id="tuition"></div>
+				</section>
+			</div>
+		</section>
+
+	</div>
+
+	<!-- Footer -->
+	<footer id="footer" class="wrapper alt">
+		<div class="inner">
+			<ul class="menu">
+				<li>&copy; Untitled. All rights reserved.</li>
+				<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+			</ul>
+		</div>
+	</footer>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script src="js/graphplotter.js"></script>
+	<script src="js/doublegraphupdater.js"></script>
+	<script src="js/piechart.js"></script>
+	<script src="js/bristolbudget.js"></script>
+
+
+
+	<script>
+		graphplotter();
+		doubleupdater();
+		bristolbudget();
+	</script>
+
+
+</body>
+
+</html>
