@@ -39,14 +39,24 @@ function bristolbudget() {
 
     var layout = {
         title: "Bristol University Budget Breakdown",
-        height: 800,
-        width: 1000,
+        // height: 800,
+        // width: 1000,
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor: 'rgba(0,0,0,0)',
         grid: { rows: 1, columns: 2 },
+        font: {
+            family: 'Arial',
+            size: 16,
+            color: '#ffffff'
+    
+        },
         showlegend: false,
         annotations: [
             {
                 font: {
-                    size: 20
+                    size: 16,
+                    color: '#ffffff'
+
                 },
                 showarrow: false,
                 text: 'Income',
@@ -55,7 +65,9 @@ function bristolbudget() {
             },
             {
                 font: {
-                    size: 20
+                    size: 16,
+                    color: '#ffffff'
+
                 },
                 showarrow: false,
                 text: 'Expenditure',

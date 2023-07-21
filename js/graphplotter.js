@@ -23,8 +23,16 @@ function graphplotter() {
     }
     var data = [stipendpart, earnings];
     var layout = {
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor: 'rgba(0,0,0,0)',
         barmode: 'stack',
         title: "How hours worked affect finances",
+        font: {
+            family: 'Arial',
+            size: 16,
+            color: '#ffffff'
+    
+        },
         yaxis: {
             range: [0, 2500],
             title: {

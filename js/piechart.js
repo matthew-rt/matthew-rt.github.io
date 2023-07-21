@@ -18,8 +18,16 @@ function stipendadjuster() {
 
     var layout = {
         title: "UKRI Budget Breakdown",
-        height: 400,
-        width: 500
+        // height: 400,
+        // width: 500
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor: 'rgba(0,0,0,0)',
+        font: {
+            family: 'Arial',
+            size: 16,
+            color: '#ffffff'
+    
+        }
     };
 
     Plotly.newPlot('piechart', data, layout);
