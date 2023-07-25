@@ -4361,3 +4361,18 @@ body.is-preload #sidebar nav ul li {
 	}
 
 }
+
+.highcharts-credits {
+    display: none !important;
+}
+
+.card {
+	padding: 20px;
+	margin: 10px;
+	width: 700px;
+	display: none;
+  }
+  .active-card {
+	display: block !important;
+  }
+  
