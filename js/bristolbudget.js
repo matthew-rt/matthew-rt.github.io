@@ -48,7 +48,7 @@ function bristolbudget() {
             family: 'Arial',
             size: 16,
             color: '#ffffff'
-    
+
         },
         showlegend: false,
         annotations: [
@@ -59,8 +59,9 @@ function bristolbudget() {
 
                 },
                 showarrow: false,
-                text: 'Income',
-                x: 0.18,
+                //makes the text read: Income and then the sum of all values in the list
+                text: '£'.concat(incomelist.reduce((a, b) => a + b, 0).toFixed(1).toString()).concat("m"),
+                x: 0.2,
                 y: 0.5
             },
             {
@@ -70,10 +71,25 @@ function bristolbudget() {
 
                 },
                 showarrow: false,
-                text: 'Expenditure',
-                x: 0.84,
+                text: '£'.concat(expenditurelist.reduce((a, b) => a + b, 0).toFixed(1).toString()).concat("m"),
+                x: 0.81,
                 y: 0.5
+            },
+            {
+                font: { size: 20, color: '#ffffff' },
+                showarrow: false,
+                text: 'Income',
+                x: 0.2,
+                y: 1.15
+            },
+            {
+                font: { size: 20, color: '#ffffff' },
+                showarrow: false,
+                text: 'Expenditure',
+                x: 0.815,
+                y: 1.15,
             }
+
         ]
 
 
