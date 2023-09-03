@@ -8,37 +8,36 @@
 
 <head>
     <title>PGR Finance</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="assets/css/main.css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="assets/css/main.css">
     <noscript>
         <link rel="stylesheet" href="assets/css/noscript.css" />
     </noscript>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <style type=text/css>
-        .leftdiv {
-            float: left;
-            padding: 1%;
-            color: white;
-            background-color: 009900;
-            width: 45%;
+	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script><style id="plotly.js-style-global"></style>
+    <style type="text/css">
+        .leftdiv
+        {
+        float: left;
+        padding : 1%;
+        color: white;
+        background-color: 009900;
+        width: 45%;
+    }
+        .rightdiv
+        {
+        float: left;
+        padding : 1%;
+        color: white;
+        background-color: 009900;
+        width: 55%;
         }
-
-        .rightdiv {
-            float: left;
-            padding: 1%;
-            color: white;
-            background-color: 009900;
-            width: 55%;
-        }
-
-        div {
+        div{
             width: 100%;
         }
-    </style>
+     </style>
 </head>
-
-<body class="is-preload">
+<body class="">
 
     <!-- Header -->
     <header id="header">
@@ -62,85 +61,87 @@
 
                 <!-- Text -->
                 <section>
-                    <h3>The hidden costs of being a postgraduate researcher disproportionately impact certain
-                        demographics. In particular, <b>international students</b>, students with dependents and
-                        students with disabilities are most affected.</h3>
-                    <hr />
-
+                    <h3>The hidden costs of being a postgraduate researcher disproportionately impact certain demographics. In particular, <b>international students</b>, students with dependents and students with disabilities are most affected.</h3>
+                    <hr>
+                    
                     <section>
-                        <div class="leftdiv" id="internationalpie"></div>
+                        <div class="leftdiv js-plotly-plot" id="internationalpie"><div class="plot-container plotly"><div class="user-select-none svg-container" style="position: relative; width: 500px; height: 400px;"><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" height="400" style="background: rgba(0, 0, 0, 0);"><defs id="defs-e84470"><g class="clips"></g><g class="gradients"></g></defs><g class="bglayer"></g><g class="draglayer"></g><g class="layer-below"><g class="imagelayer"></g><g class="shapelayer"></g></g><g class="cartesianlayer"></g><g class="polarlayer"></g><g class="ternarylayer"></g><g class="geolayer"></g><g class="funnelarealayer"></g><g class="pielayer"><g class="trace" stroke-linejoin="round" style="opacity: 1;"><g class="slice"><path class="surface" d="M250,210l0,-110a110,110 0 1 1 -56.84570060799093,204.17306580114433Z" style="pointer-events: all; stroke-width: 0; fill: rgb(31, 119, 180); fill-opacity: 1; stroke: rgb(68, 68, 68); stroke-opacity: 1;"></path><g class="slicetext"><text data-notex="1" class="slicetext" transform="translate(395.023948413632,236.1664998709348)" text-anchor="middle" data-unformatted="Housing<br>58.6%" data-math="N" x="0" y="0" style="font-family: Arial; font-size: 16px; fill: rgb(255, 255, 255); fill-opacity: 1; white-space: pre;"><tspan class="line" dy="0em" x="0" y="0">Housing</tspan><tspan class="line" dy="1.3em" x="0" y="0">58.6%</tspan></text></g></g><g class="slice"><path class="surface" d="M250,210l-108.78167458030795,-16.326275616440636a110,110 0 0 1 108.78167458030795,-93.67372438355936Z" style="pointer-events: all; stroke-width: 0; fill: rgb(255, 127, 14); fill-opacity: 1; stroke: rgb(68, 68, 68); stroke-opacity: 1;"></path><g class="slicetext"><text data-notex="1" class="slicetext" transform="translate(130.2776823226323,110.77287205646154)" text-anchor="middle" data-unformatted="Remaining<br>22.6%" data-math="N" x="0" y="0" style="font-family: Arial; font-size: 16px; fill: rgb(255, 255, 255); fill-opacity: 1; white-space: pre;"><tspan class="line" dy="0em" x="0" y="0">Remaining</tspan><tspan class="line" dy="1.3em" x="0" y="0">22.6%</tspan></text></g></g><g class="slice"><path class="surface" d="M250,210l-91.84874039225821,60.52940515448303a110,110 0 0 1 -16.932934188049742,-76.85568077092367Z" style="pointer-events: all; stroke-width: 0; fill: rgb(44, 160, 44); fill-opacity: 1; stroke: rgb(68, 68, 68); stroke-opacity: 1;"></path><g class="slicetext"><text data-notex="1" class="slicetext" transform="translate(110.7825705804658,229.832741395528)" text-anchor="middle" data-unformatted="Food<br>11.6%" data-math="N" x="0" y="0" style="font-family: Arial; font-size: 16px; fill: rgb(255, 255, 255); fill-opacity: 1; white-space: pre;"><tspan class="line" dy="0em" x="0" y="0">Food</tspan><tspan class="line" dy="1.3em" x="0" y="0">11.6%</tspan></text></g></g><g class="slice"><path class="surface" d="M250,210l-56.84570060799099,94.17306580114429a110,110 0 0 1 -35.003039784267216,-33.64366064666126Z" style="pointer-events: all; stroke-width: 0; fill: rgb(214, 39, 40); fill-opacity: 1; stroke: rgb(68, 68, 68); stroke-opacity: 1;"></path><g class="slicetext"><text data-notex="1" class="slicetext" transform="translate(141.38594143204662,294.65745309435624)" text-anchor="middle" data-unformatted="Bills<br>7.08%" data-math="N" x="0" y="0" style="font-family: Arial; font-size: 16px; fill: rgb(255, 255, 255); fill-opacity: 1; white-space: pre;"><tspan class="line" dy="0em" x="0" y="0">Bills</tspan><tspan class="line" dy="1.3em" x="0" y="0">7.08%</tspan></text></g></g></g></g><g class="treemaplayer"></g><g class="sunburstlayer"></g><g class="glimages"></g></svg><div class="gl-container"></div><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" height="400"><defs id="topdefs-e84470"><g class="clips"></g></defs><g class="indicatorlayer"></g><g class="layer-above"><g class="imagelayer"></g><g class="shapelayer"></g></g><g class="infolayer"><g class="g-gtitle"><text class="gtitle" x="250" y="50" text-anchor="middle" dy="0em" data-unformatted="Monthly Costs Breakdown" data-math="N" style="font-family: Arial; font-size: 22px; fill: rgb(255, 255, 255); opacity: 1; font-weight: normal; white-space: pre;">Monthly Costs Breakdown</text></g></g><g class="menulayer"></g><g class="zoomlayer"></g></svg><div class="modebar-container" style="position: absolute; top: 0px; right: 0px; width: 100%;"></div><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" height="400"><g class="hoverlayer"></g></svg></div></div></div>
                         <div class="rightdiv">
                             <div class="inner">
                                 <h2>International Students</h2>
-                                <p>The average international student has to pay <b>£398</b> more in rent every month
-                                    than a home student, this is often due to the lack of a British guarantor. For the
-                                    same reason, international students are often subject to much higher desposits for
-                                    renting and are often asked to pay multiple installments of rent in advance.</p>
-                                <p>After paying their rent, bills and food*, the average international student living in
-                                    Bristol has just <b>£236</b> left for everything else in the month. This includes
-                                    travel, resources for study and any unexpected payments that they may have to make.
-                                    Many students rely on savings, while others take out loans to survive during the
-                                    cost of living crisis.</p>
-                                <p>*Using the national average of £194 per month spent on food per individual - Survey
-                                    conducted by Nimblefins 2023.</p>
+                                <p>The average international student has to pay <b>£168</b> more in rent every month than a home student, this is often due to the lack of a British guarantor. For the same reason, international students are often subject to much higher desposits for renting and are often asked to pay multiple installments of rent in advance.</p>
+                                <p>After paying their rent, bills and food*, the average international student living in Bristol has just <b>£236</b> left for everything else in the month. This includes travel, resources for study and any unexpected payments that they may have to make. Many students rely on savings, while others take out loans to survive during the cost of living crisis.</p>
+                                <p>*Using the national average of £194 per month spent on food per individual - Survey conducted by Nimblefins 2023.</p>
                                 <!-- <ul class="actions">
                                     <li><a href="generic.html" class="button">Learn more</a></li>
                                 </ul> -->
                             </div>
                         </div>
                     </section>
-                    <hr />
-                    <hr>
-                    <h3>Outside of the monthly expenses, international studens are subject to many other costs:</h3>
+        <hr> 
+        <hr>
+                    <h3>Outside of the monthly expenses, international students are subject to many other costs:</h3>
                     <ul>
-                        <li><b>Student Visa: £363</b> for your UK student visa which will allow you to live and study in
-                            the UK throughout your course. Many students are informed of a successful application with
-                            less than 3 months to organise their living plans and their visas, this means that the visa
-                            has an additional <b>£500</b> charge to be priority and if it is very short notice, an
-                            additonal fee of <b>£1290</b> must be paid for superior priority. Although all successful
-                            international applicants submit their applications over 8 months before their study, they
-                            often have to pay these <b>additional fees</b> due to the late decisions of the school they
-                            applied to.</li>
-                        <li><b>NHS Surcharge: £470 </b> for the Immigration Health Surcharge per year which will give
-                            you access to the UK's National Health Service - this is the discounted student visa
-                            holders, so over the course of the PhD this is <b>£1880</b>.</li>
-                        <li><b>Fees for other healthcare: £2000+ on average </b> for dental care, opticians and other
-                            services that are not covered by the Immigration Health Surcharge. Many students require
-                            visits to dentists, opticians, physiotherapists over the course of their 4 year degree and
-                            they have to pay for these out of the £236 they have remaining at the end of the month. If a
-                            student needs surgery, the need to pay for this out of pocket; the average cost of a surgery
-                            is £2500 in the UK and this results in many students taking out loans to cover the cost.
-                        </li>
-                        <li><b>Visiting Home: £200+</b> for flights to visit home in between your PhD study. Being a
-                            postgraduate researcher in a new country can be an isolating experience, but for many PhD
-                            students visits home are very infrequent due to the low stipend they receive. Just visiting
-                            loved ones twice a year can cost over £1000 for the course of the PhD.</li>
+                        <li><b>Student Visa: £363</b> for your UK student visa which will allow you to live and study in the UK throughout your course. Many students are informed of a successful application with less than 3 months to organise their living plans and their visas, this means that the visa has an additional <b>£500</b> charge to be priority and if it is very short notice, an additonal fee of <b>£1290</b> must be paid for superior priority. Although all successful international applicants submit their applications over 8 months before their study, they often have to pay these <b>additional fees</b> due to the late decisions of the school they applied to.</li>
+                        <li><b>NHS Surcharge: £470 </b> for the Immigration Health Surcharge per year which will give you access to the UK's National Health Service - this is the discounted student visa holders, so over the course of the PhD this is <b>£1880</b>.</li>
+                        <li><b>Fees for other healthcare: £2000+ on average </b> for dental care, opticians and other services that are not covered by the Immigration Health Surcharge. Many students require visits to dentists, opticians, physiotherapists over the course of their 4 year degree and they have to pay for these out of the £236 they have remaining at the end of the month. If a student needs surgery, the need to pay for this out of pocket; the average cost of a surgery is £2500 in the UK and this results in many students taking out loans to cover the cost.</li>
+                        <li><b>Visiting Home: £200+</b> for flights to visit home in between your PhD study. Being a postgraduate researcher in a new country can be an isolating experience, but for many PhD students visits home are very infrequent due to the low stipend they receive. Just visiting loved ones twice a year can cost over £1000 for the course of the PhD.</li>
                     </ul>
+ 
+                    <hr>
+                    <h2>Surcharge &amp; Visa Increase 2024</h2>
+                    <h3>The government has recently announced that they will be increasing the Immigration Health Surcharge to <b>£1035 per person</b> and visa costs as well this following year:</h3>
+                    <blockquote>On 13 July 2023, the UK Government announced that the Immigration Health Surcharge (IHS) will increase by 66%, from £624 to £1,035 per person per year for most main applicants. UK visa application fees are also set to increase by at least 15%.
 
-                    <hr />
-                    <h2>Surcharge & Visa Increase 2024</h2>
-                    <h3>The government has recently announced that they will be increasing the Immigration Health
-                        Surcharge to <b>£1035 per person</b> and visa costs as well this following year:</h3>
-                    <blockquote>On 13 July 2023, the UK Government announced that the Immigration Health Surcharge (IHS)
-                        will increase by 66%, from £624 to £1,035 per person per year for most main applicants. UK visa
-                        application fees are also set to increase by at least 15%.
-
-                        The Government has not yet announced when this substantial increase in the cost of applying for
-                        a UK visa will come into effect. However, the timing of the announcement suggests that it may be
-                        as soon as the Autumn. - Richmond Chambers.</blockquote>
-
+                        The Government has not yet announced when this substantial increase in the cost of applying for a UK visa will come into effect. However, the timing of the announcement suggests that it may be as soon as the Autumn. - Richmond Chambers.</blockquote>
+                    <hr>
+                    <section>
+                        <div class="leftdiv js-plotly-plot" id="dependents"><div class="plot-container plotly"><div class="user-select-none svg-container" style="position: relative; width: 500px; height: 400px;"><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" height="400" style="background: rgba(0, 0, 0, 0);"><defs id="defs-799321"><g class="clips"></g><g class="gradients"></g></defs><g class="bglayer"></g><g class="draglayer"></g><g class="layer-below"><g class="imagelayer"></g><g class="shapelayer"></g></g><g class="cartesianlayer"></g><g class="polarlayer"></g><g class="ternarylayer"></g><g class="geolayer"></g><g class="funnelarealayer"></g><g class="pielayer"><g class="trace" stroke-linejoin="round" style="opacity: 1;"><g class="slice"><path class="surface" d="M250,210l0,-110a110,110 0 0 1 100.05951948899703,155.6956514302075Z" style="pointer-events: all; stroke-width: 0; fill: rgb(31, 119, 180); fill-opacity: 1; stroke: rgb(68, 68, 68); stroke-opacity: 1;"></path><g class="slicetext"><text data-notex="1" class="slicetext" transform="translate(390.48792179929615,140.1259421166418)" text-anchor="middle" data-unformatted="5-15 hours<br>31.8%" data-math="N" x="0" y="0" style="font-family: Arial; font-size: 16px; fill: rgb(255, 255, 255); fill-opacity: 1; white-space: pre;"><tspan class="line" dy="0em" x="0" y="0">5-15 hours</tspan><tspan class="line" dy="1.3em" x="0" y="0">31.8%</tspan></text></g></g><g class="slice"><path class="surface" d="M250,210l-108.8803586069026,15.65463221006135a110,110 0 0 1 108.8803586069026,-125.65463221006135Z" style="pointer-events: all; stroke-width: 0; fill: rgb(255, 127, 14); fill-opacity: 1; stroke: rgb(68, 68, 68); stroke-opacity: 1;"></path><g class="slicetext"><text data-notex="1" class="slicetext" transform="translate(114.46991994420054,124.91267054429667)" text-anchor="middle" data-unformatted="15-25 hours<br>27.3%" data-math="N" x="0" y="0" style="font-family: Arial; font-size: 16px; fill: rgb(255, 255, 255); fill-opacity: 1; white-space: pre;"><tspan class="line" dy="0em" x="0" y="0">15-25 hours</tspan><tspan class="line" dy="1.3em" x="0" y="0">27.3%</tspan></text></g></g><g class="slice"><path class="surface" d="M250,210l-30.990581252557263,105.54422709759471a110,110 0 0 1 -77.88977735434534,-89.88959488753336Z" style="pointer-events: all; stroke-width: 0; fill: rgb(44, 160, 44); fill-opacity: 1; stroke: rgb(68, 68, 68); stroke-opacity: 1;"></path><g class="slicetext"><text data-notex="1" class="slicetext" transform="translate(106.4754512552357,285.62118107923845)" text-anchor="middle" data-unformatted="Over 35 hours<br>18.2%" data-math="N" x="0" y="0" style="font-family: Arial; font-size: 16px; fill: rgb(255, 255, 255); fill-opacity: 1; white-space: pre;"><tspan class="line" dy="0em" x="0" y="0">Over 35 hours</tspan><tspan class="line" dy="1.3em" x="0" y="0">18.2%</tspan></text></g></g><g class="slice"><path class="surface" d="M250,210l59.470489920115696,92.53788861142996a110,110 0 0 1 -90.46107117267296,13.00633848616475Z" style="pointer-events: all; stroke-width: 0; fill: rgb(214, 39, 40); fill-opacity: 1; stroke: rgb(68, 68, 68); stroke-opacity: 1;"></path><g class="slicetext"><text data-notex="1" class="slicetext" transform="translate(326.05290758542753,333.1544312941215)" text-anchor="middle" data-unformatted="Under 5 hours<br>13.6%" data-math="N" x="0" y="0" style="font-family: Arial; font-size: 16px; fill: rgb(255, 255, 255); fill-opacity: 1; white-space: pre;"><tspan class="line" dy="0em" x="0" y="0">Under 5 hours</tspan><tspan class="line" dy="1.3em" x="0" y="0">13.6%</tspan></text></g></g><g class="slice"><path class="surface" d="M250,210l100.05951948899698,45.69565143020759a110,110 0 0 1 -40.58902956888129,46.84223718122237Z" style="pointer-events: all; stroke-width: 0; fill: rgb(148, 103, 189); fill-opacity: 1; stroke: rgb(68, 68, 68); stroke-opacity: 1;"></path><g class="slicetext"><text data-notex="1" class="slicetext" transform="translate(385.5307285543346,285.62118107923857)" text-anchor="middle" data-unformatted="25-35 hours<br>9.09%" data-math="N" x="0" y="0" style="font-family: Arial; font-size: 16px; fill: rgb(255, 255, 255); fill-opacity: 1; white-space: pre;"><tspan class="line" dy="0em" x="0" y="0">25-35 hours</tspan><tspan class="line" dy="1.3em" x="0" y="0">9.09%</tspan></text></g></g></g></g><g class="treemaplayer"></g><g class="sunburstlayer"></g><g class="glimages"></g></svg><div class="gl-container"></div><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" height="400"><defs id="topdefs-799321"><g class="clips"></g></defs><g class="indicatorlayer"></g><g class="layer-above"><g class="imagelayer"></g><g class="shapelayer"></g></g><g class="infolayer"><g class="g-gtitle"><text class="gtitle" x="250" y="50" text-anchor="middle" dy="0em" data-unformatted="Distribution of additional hours worked per week" data-math="N" style="font-family: Arial; font-size: 22px; fill: rgb(255, 255, 255); opacity: 1; font-weight: normal; white-space: pre;">Distribution of additional hours worked per week</text></g></g><g class="menulayer"></g><g class="zoomlayer"></g></svg><div class="modebar-container" style="position: absolute; top: 0px; right: 0px; width: 100%;"></div><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" height="400"><g class="hoverlayer"></g></svg></div></div></div>
+                        <div class="rightdiv">
+                            <div class="inner">
+                                <h2>Students with Dependents</h2>
+                                <p>In the survery conducted, it was discovered that 41% of students with dependents had seriously considered withdrawing from their studies. Out of these students, 83% of these students stated that they were considering withdrawing due to their financial situation. </p>
+                                <p>The average rent for students without dependents for PhD students studying at the University of Bristol is £631 per month; however, for students with dependents, the average monthly rent increases to £860.</p>
+                                <p>Bills also increase for students with dependents, with an average monthly cost of £200 for bills compared to £98 for the average student without dependents. Therefore, on average, a student with dependents spends over 80% of their monthly stipend paying only their rent and bills.  </p>
+                                <!-- <ul class="actions">
+                                    <li><a href="generic.html" class="button">Learn more</a></li>
+                                </ul> -->
+                                
+                            </div>
+                        </div>
+                    </section> <hr>
+                    <hr>
+                    <ul>
+                        <li>On average, a student with dependents spends over 80% of their monthly stipend paying only their rent and bills. </li>
+                        <li>As a result, 62% of students with dependents supplement their income with a second job and, on average, they work an additional 17 hours a week during term-time on top of their PhD. </li>
+                        <li>The majority of students described paying for essential costs and financially providing for their family as their primary motivations for pursuing a second job. </li>
+                        <li>Many students with dependents need to dedicate considerable time to taking care of their dependents alongside their PhD studies, the added pressure of an additional job may take a substantial toll on their quality of life and mental health.  </li>
+                    </ul>
+                    
+                    <p>For students with children, an additional cost to consider is childcare. The national average for part-time childcare is £118 weekly, this would mean that the average PhD student would need to take on another job to supplement their income as it would no longer be possible to cover essential costs without taking out a loan. Taking on an additional job may translate to the student requiring full-time childcare, which would further increase their living costs.  </p>
+                    <hr>
+                    <h2>Students with Disabilities</h2>
+                    <h3>It is difficult to quantify the financial hardships that accompany living with a disability, the Scope organisation estimated that a household with one disabled individual spends £975 more monthly and a household with two or more disabled individuals spends £1248 more monthly (Scope: Disability Price Tag, 2023). </h3>
+                    <p>These households must often pay more for essential goods and services like insurances, essential assistive equipment, and therapies. Disabled people often face much higher costs for their gas and electricity; this may be to charge devices of assistive technology, or it may be that a warmer home is important for the health of the disabled person. The Disabled Student Allowance is designed to provide financial support for students with disabilities - however there are many students who do not qualify for this allowance such as international students with disabilities.  </p>
+                    <p>Also, there are many aspects of living that are not covered by this allowance; it is often the case that modifications need to be made to a student property in order for it to become liveable for a student with disabilities. These modifications are often considered the financial responsibility of the student and, depending on the severity of the disability, these modifications can be extremely expensive.  </p>
+                    <hr>
+                    <h3>Other statistics for students with disabilities:</h3>
+                    <ul>
+                        <li>Through the survey, it was discovered that 48% of students with disabilities have considered withdrawing and they are also more likely to take on an additional job than other groups. </li>
+                        <li>Overall, 67% of all PhD students supplement their income by pursuing a second job, whereas 75% of PhD students with disabilities pursue a second job during their studies. </li>
+                        <li>When asked to rate the importance of their second job for managing their financial situation, with a rating of 10 corresponding to the second job being essential for covering monthly expenses, students with disabilities provided an average rating of 8.29. This is compared to the average rating across all other PhD students, which was 7.62. </li>
+                        <li>For other demographics, there was a wider spectrum of motivations for taking on another job based on the survey and many students stated that the monthly expenses covered by the additional income were for PhD resources and trips, as well as hobbies. </li>
+                        <li>As for students with disabilities, 65% disclosed that the additional income was for covering their essential costs alone, compared to the average across all other students of 56%. </li>
+                    </ul>
+                    <hr>
                 </section>
 
-            </div>
-        </section>
-
-    </div>
-
+              
     <!-- Footer -->
     <footer id="footer" class="wrapper alt">
         <div class="inner">
             <ul class="menu">
-                <li>&copy; Untitled. All rights reserved.</li>
+                <li>© Untitled. All rights reserved.</li>
                 <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
             </ul>
         </div>
@@ -155,8 +156,9 @@
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="js/internationalpie.js"></script>
+    <script src="js/dependents.js"></script>
 
 
-</body>
 
+</div></section></div><svg id="js-plotly-tester" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position: absolute; left: -10000px; top: -10000px; width: 9000px; height: 9000px; z-index: 1;"><path class="js-reference-point" d="M0,0H1V1H0Z" style="stroke-width: 0; fill: black;"></path></svg></body>
 </html>
