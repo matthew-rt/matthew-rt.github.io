@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UK Onshore Wind Energy Tradeoffs</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #f5f5f5;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            grid-template-rows: 1fr 1fr;
+            height: 100vh;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        #map {
+            grid-row: 1 / 3;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: #e8f4f8;
+        }
+
+        #map *:focus,
+        #map *:focus-visible,
+        .leaflet-container *:focus,
+        .leaflet-container *:focus-visible,
+        .leaflet-interactive:focus,
+        .leaflet-interactive:focus-visible {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        .leaflet-container {
+            outline: none !important;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        svg:focus,
+        svg:focus-visible,
+        path:focus,
+        path:focus-visible {
+            outline: none !important;
+        }
+
+        .panel {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .panel h2 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #333;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 8px;
+        }
+
+        #chart-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #waterfall-chart {
+            flex: 1;
+            min-height: 0;
+        }
+
+        .selected-zone {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .capacity-display {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+
+        .options-section {
+            margin-bottom: 20px;
+        }
+
+        .options-section h3 {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .option-group {
+            margin-bottom: 15px;
+        }
+
+        .option-group > label {
+            display: block;
+            font-size: 13px;
+            color: #444;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .checkbox-option input {
+            margin-right: 8px;
+        }
+
+        .checkbox-option label {
+            font-size: 13px;
+            color: #444;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+        }
+
+        .radio-option input {
+            margin-right: 8px;
+        }
+
+        .radio-option label {
+            font-size: 13px;
+            color: #444;
+        }
+
+        .slider-container {
+            margin-top: 5px;
+        }
+
+        .slider-container input[type="range"] {
+            width: 100%;
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #888;
+            margin-top: 3px;
+        }
+
+        #apply-btn {
+            width: 100%;
+            padding: 12px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
+
+        #apply-btn:hover {
+            background: #45a049;
+        }
+
+        .legend {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .legend-gradient {
+            width: 150px;
+            height: 15px;
+            background: linear-gradient(to right, #fee0d2, #fc9272, #de2d26);
+            border-radius: 3px;
+        }
+
+        .legend-labels {
+            display: flex;
+            justify-content: space-between;
+            width: 150px;
+            font-size: 10px;
+            color: #666;
+        }
+
+        .legend-title {
+            font-size: 12px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="map"></div>
+
+        <div class="panel" id="chart-container">
+            <h2>Capacity Reduction Waterfall</h2>
+            <div class="selected-zone">Selected: <strong id="selected-zone-name">All UK</strong></div>
+            <div class="capacity-display"><span id="capacity-value">0</span> GW</div>
+            <div id="waterfall-chart"></div>
+        </div>
+
+        <div class="panel" id="options-container">
+            <h2>Exclusion Options</h2>
+
+            <div class="options-section">
+                <h3>Hard Constraints</h3>
+
+                <div class="option-group">
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="biodiversity" checked>
+                        <label for="biodiversity">Biodiversity (Ramsar, SPAs, SSSIs, SACs)</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="world-heritage" checked>
+                        <label for="world-heritage">World Heritage Sites</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="options-section">
+                <h3>Soft Constraints</h3>
+
+                <div class="option-group">
+                    <label>Landscape Protection</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" name="landscape" id="land-1" value="1" checked>
+                            <label for="land-1">Level 1: No protections</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="landscape" id="land-2" value="2">
+                            <label for="land-2">Level 2: National Parks</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="landscape" id="land-3" value="3">
+                            <label for="land-3">Level 3: + AONBs</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="landscape" id="land-4" value="4">
+                            <label for="land-4">Level 4: + Green Belt</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="option-group">
+                    <label>Listed Buildings Setback</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" name="listed" id="list-500" value="500" checked>
+                            <label for="list-500">500m setback</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="listed" id="list-1000" value="1000">
+                            <label for="list-1000">1000m setback</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="listed" id="list-1500" value="1500">
+                            <label for="list-1500">1500m setback</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="option-group">
+                    <label>Building Setback: <span id="building-value">500m</span></label>
+                    <div class="slider-container">
+                        <input type="range" id="building-setback" min="0" max="4" value="1" step="1">
+                        <div class="slider-labels">
+                            <span>250m</span>
+                            <span>500m</span>
+                            <span>750m</span>
+                            <span>1000m</span>
+                            <span>1250m</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button id="apply-btn">Apply Options</button>
+
+            <div class="legend">
+                <div>
+                    <div class="legend-title">Capacity (GW)</div>
+                    <div class="legend-gradient"></div>
+                    <div class="legend-labels">
+                        <span>0</span>
+                        <span id="legend-max">100</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Application state
+        let map = null;
+        let geojsonLayer = null;
+        let selectedZone = null;
+        let zonesData = null;
+        let capacityData = null;
+
+        // Currently applied options (only changes when Apply is clicked)
+        let appliedOptions = {
+            bio: 1,
+            whs: 1,
+            land: 1,
+            listed: 500,
+            bld: 500
+        };
+
+        // Building setback values
+        const buildingSetbackValues = [250, 500, 750, 1000, 1250];
+
+        // Data indices in the zone arrays
+        // [baseline, bio_red, whs_red, land_red, listed_red, bld_red, parcel_red, final]
+        const IDX = {
+            BASELINE: 0,
+            BIO: 1,
+            WHS: 2,
+            LAND: 3,
+            LISTED: 4,
+            BLD: 5,
+            PARCEL: 6,
+            FINAL: 7
+        };
+
+        // Get data key from applied options
+        function getDataKey() {
+            return `${appliedOptions.bio}_${appliedOptions.whs}_${appliedOptions.land}_${appliedOptions.listed}_${appliedOptions.bld}`;
+        }
+
+        // Get current UI options (not yet applied)
+        function getCurrentUIOptions() {
+            return {
+                bio: document.getElementById('biodiversity').checked ? 1 : 0,
+                whs: document.getElementById('world-heritage').checked ? 1 : 0,
+                land: parseInt(document.querySelector('input[name="landscape"]:checked').value),
+                listed: parseInt(document.querySelector('input[name="listed"]:checked').value),
+                bld: buildingSetbackValues[document.getElementById('building-setback').value]
+            };
+        }
+
+        // Get zone data for applied options
+        function getZoneData(zoneId) {
+            const key = getDataKey();
+            if (!capacityData || !capacityData[key]) return null;
+            return capacityData[key][zoneId - 1]; // zones are 1-indexed, array is 0-indexed
+        }
+
+        // Get aggregated data for all zones
+        function getAllZonesData() {
+            const key = getDataKey();
+            if (!capacityData || !capacityData[key]) return null;
+
+            const zones = capacityData[key];
+            const aggregated = [0, 0, 0, 0, 0, 0, 0, 0];
+
+            for (let i = 0; i < zones.length; i++) {
+                for (let j = 0; j < 8; j++) {
+                    aggregated[j] += zones[i][j];
+                }
+            }
+            return aggregated;
+        }
+
+        // Color scale for capacity
+        function getCapacityColor(capacity, maxCapacity) {
+            if (maxCapacity === 0) return '#f0f0f0';
+            const ratio = Math.min(capacity / maxCapacity, 1);
+
+            // Color scale: light red -> dark red (higher capacity = more potential)
+            const r = Math.round(254 - ratio * 32);
+            const g = Math.round(224 - ratio * 179);
+            const b = Math.round(210 - ratio * 172);
+
+            return `rgb(${r}, ${g}, ${b})`;
+        }
+
+        // Calculate max capacity across all zones for applied options
+        function getMaxZoneCapacity() {
+            const key = getDataKey();
+            if (!capacityData || !capacityData[key]) return 100;
+
+            const zones = capacityData[key];
+            let max = 0;
+            for (let i = 0; i < zones.length; i++) {
+                if (zones[i][IDX.FINAL] > max) {
+                    max = zones[i][IDX.FINAL];
+                }
+            }
+            return max || 100;
+        }
+
+        // Initialize the map
+        function initMap() {
+            map = L.map('map', {
+                zoomControl: false,
+                attributionControl: false,
+                dragging: false,
+                touchZoom: false,
+                scrollWheelZoom: false,
+                doubleClickZoom: false,
+                boxZoom: false,
+                keyboard: false,
+                tap: false,
+                tapTolerance: 0
+            }).setView([54.5, -2], 6);
+
+            loadGeoJSON();
+        }
+
+        // Load GeoJSON data
+        async function loadGeoJSON() {
+            try {
+                const response = await fetch('mapdata/tnuosgenzones_compressed.geojson');
+                zonesData = await response.json();
+
+                geojsonLayer = L.geoJSON(zonesData, {
+                    style: styleFeature,
+                    onEachFeature: onEachFeature
+                }).addTo(map);
+
+                map.fitBounds(geojsonLayer.getBounds());
+
+            } catch (error) {
+                console.error('Error loading GeoJSON:', error);
+                alert('Error loading map data. Make sure to serve this page from a local server.');
+            }
+        }
+
+        // Load capacity data
+        async function loadCapacityData() {
+            try {
+                const response = await fetch('outputs/zone_results/step_reductions.json');
+                capacityData = await response.json();
+                updateAll();
+            } catch (error) {
+                console.error('Error loading capacity data:', error);
+                alert('Error loading capacity data.');
+            }
+        }
+
+        // Style function for zones
+        function styleFeature(feature) {
+            const zoneId = feature.properties.id;
+            const isSelected = selectedZone === zoneId;
+
+            let fillColor = '#f0f0f0';
+            if (capacityData) {
+                const zoneData = getZoneData(zoneId);
+                if (zoneData) {
+                    const maxCapacity = getMaxZoneCapacity();
+                    fillColor = getCapacityColor(zoneData[IDX.FINAL], maxCapacity);
+                }
+            }
+
+            return {
+                fillColor: fillColor,
+                weight: isSelected ? 3 : 1.5,
+                opacity: 1,
+                color: isSelected ? '#000' : '#fff',
+                fillOpacity: isSelected ? 0.95 : 0.85
+            };
+        }
+
+        // Highlight on hover
+        function highlightFeature(e) {
+            const layer = e.target;
+            if (selectedZone !== layer.feature.properties.id) {
+                layer.setStyle({
+                    weight: 2,
+                    color: '#666',
+                    fillOpacity: 0.9
+                });
+            }
+        }
+
+        // Reset highlight
+        function resetHighlight(e) {
+            const layer = e.target;
+            if (selectedZone !== layer.feature.properties.id) {
+                geojsonLayer.resetStyle(layer);
+            }
+        }
+
+        // Handle zone click
+        function selectZone(e) {
+            const zoneId = e.target.feature.properties.id;
+
+            if (selectedZone === zoneId) {
+                selectedZone = null;
+                document.getElementById('selected-zone-name').textContent = 'All UK';
+            } else {
+                selectedZone = zoneId;
+                document.getElementById('selected-zone-name').textContent = `Zone ${zoneId}`;
+            }
+
+            geojsonLayer.eachLayer(layer => {
+                geojsonLayer.resetStyle(layer);
+            });
+
+            updateChart();
+        }
+
+        // Bind events to each feature
+        function onEachFeature(feature, layer) {
+            layer.on({
+                mouseover: highlightFeature,
+                mouseout: resetHighlight,
+                click: selectZone
+            });
+
+            layer.bindTooltip(`Zone ${feature.properties.id}`, {
+                permanent: false,
+                direction: 'center',
+                className: 'zone-tooltip'
+            });
+        }
+
+        // Update Plotly waterfall chart
+        function updateChart() {
+            if (!capacityData) return;
+
+            const data = selectedZone ? getZoneData(selectedZone) : getAllZonesData();
+            if (!data) return;
+
+            // Build waterfall data
+            const xLabels = ['Baseline', 'Biodiversity', 'Heritage', 'Landscape', 'Listed Bldgs', 'Buildings', 'Parcels', 'Final'];
+            const yValues = [
+                data[IDX.BASELINE],
+                -data[IDX.BIO],
+                -data[IDX.WHS],
+                -data[IDX.LAND],
+                -data[IDX.LISTED],
+                -data[IDX.BLD],
+                -data[IDX.PARCEL],
+                data[IDX.FINAL]
+            ];
+
+            // Measure types for waterfall
+            const measure = ['absolute', 'relative', 'relative', 'relative', 'relative', 'relative', 'relative', 'total'];
+
+            const trace = {
+                type: 'waterfall',
+                orientation: 'v',
+                x: xLabels,
+                y: yValues,
+                measure: measure,
+                textposition: 'outside',
+                text: yValues.map((v, i) => {
+                    if (i === 0 || i === 7) return v.toFixed(1);
+                    return v.toFixed(1);
+                }),
+                connector: {
+                    line: {
+                        color: 'rgb(63, 63, 63)',
+                        width: 1
+                    }
+                },
+                decreasing: {
+                    marker: {
+                        color: 'rgba(255, 99, 132, 0.8)'
+                    }
+                },
+                increasing: {
+                    marker: {
+                        color: 'rgba(75, 192, 192, 0.8)'
+                    }
+                },
+                totals: {
+                    marker: {
+                        color: 'rgba(75, 192, 192, 0.8)'
+                    }
+                }
+            };
+
+            const layout = {
+                margin: {
+                    l: 50,
+                    r: 20,
+                    t: 20,
+                    b: 80
+                },
+                yaxis: {
+                    title: 'Capacity (GW)',
+                    rangemode: 'tozero'
+                },
+                xaxis: {
+                    tickangle: -45
+                },
+                showlegend: false,
+                paper_bgcolor: 'rgba(0,0,0,0)',
+                plot_bgcolor: 'rgba(0,0,0,0)'
+            };
+
+            const config = {
+                responsive: true,
+                displayModeBar: false
+            };
+
+            Plotly.newPlot('waterfall-chart', [trace], layout, config);
+
+            // Update capacity display
+            document.getElementById('capacity-value').textContent = data[IDX.FINAL].toFixed(1);
+        }
+
+        // Update map colors
+        function updateMap() {
+            if (!geojsonLayer || !capacityData) return;
+
+            geojsonLayer.eachLayer(layer => {
+                geojsonLayer.resetStyle(layer);
+            });
+
+            // Update legend max
+            const maxCapacity = getMaxZoneCapacity();
+            document.getElementById('legend-max').textContent = maxCapacity.toFixed(0);
+        }
+
+        // Update everything
+        function updateAll() {
+            updateMap();
+            updateChart();
+        }
+
+        // Handle building setback slider (just updates label, not the data)
+        function setupSlider() {
+            const slider = document.getElementById('building-setback');
+            const valueDisplay = document.getElementById('building-value');
+
+            slider.addEventListener('input', function() {
+                valueDisplay.textContent = `${buildingSetbackValues[this.value]}m`;
+            });
+        }
+
+        // Setup Apply button
+        function setupApplyButton() {
+            document.getElementById('apply-btn').addEventListener('click', function() {
+                // Update applied options from current UI state
+                appliedOptions = getCurrentUIOptions();
+
+                // Now update everything with the new applied options
+                updateAll();
+            });
+        }
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initMap();
+            setupSlider();
+            setupApplyButton();
+            loadCapacityData();
+        });
+    </script>
+</body>
+</html>
