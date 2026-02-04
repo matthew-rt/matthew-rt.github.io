@@ -88,7 +88,7 @@
             font-size: 16px;
             margin-bottom: 15px;
             color: #333;
-            border-bottom: 2px solid #009688;
+            border-bottom: 2px solid #4CAF50;
             padding-bottom: 8px;
         }
 
@@ -123,35 +123,11 @@
             margin-bottom: 3px;
         }
 
-        .capacity-row {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 10px;
-        }
-
-        .capacity-box {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .capacity-label {
-            font-size: 11px;
-            color: #666;
-            text-transform: uppercase;
-            margin-bottom: 2px;
-        }
-
         .capacity-display {
             font-size: 18px;
             font-weight: bold;
-        }
-
-        .capacity-display.available {
-            color: #009688;
-        }
-
-        .capacity-display.current {
-            color: #1565C0;
+            color: #4CAF50;
+            margin-bottom: 5px;
         }
 
         .options-section {
@@ -227,6 +203,38 @@
             margin-top: 3px;
         }
 
+        #apply-btn {
+            width: 100%;
+            padding: 12px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
+
+        #apply-btn:hover {
+            background: #45a049;
+        }
+
+        #options-container.has-changes {
+            background: #f9f9f9;
+            border: 2px solid #ffc107;
+        }
+
+        #options-container.has-changes #apply-btn {
+            background: #ffc107;
+            color: #333;
+        }
+
+        #options-container.has-changes #apply-btn:hover {
+            background: #e0a800;
+        }
+
         .legend {
             display: flex;
             align-items: center;
@@ -239,7 +247,7 @@
         .legend-gradient {
             width: 150px;
             height: 15px;
-            background: linear-gradient(to right, #e0f2f1, #26a69a, #004d40);
+            background: linear-gradient(to right, #fee0d2, #fc9272, #de2d26);
             border-radius: 3px;
         }
 
@@ -345,7 +353,7 @@
 
         .modal-body .note {
             background: #f8f9fa;
-            border-left: 3px solid #009688;
+            border-left: 3px solid #4CAF50;
             padding: 12px 15px;
             margin: 15px 0;
             font-size: 13px;
@@ -359,7 +367,7 @@
 
         .modal-close-btn {
             padding: 10px 30px;
-            background: #009688;
+            background: #4CAF50;
             color: white;
             border: none;
             border-radius: 6px;
@@ -370,7 +378,7 @@
         }
 
         .modal-close-btn:hover {
-            background: #00796b;
+            background: #45a049;
         }
     </style>
 </head>
@@ -395,10 +403,8 @@
                     the UK.</p>
 
                 <div class="note">
-                    <strong>Note:</strong>This mapping assumes a density of 10 MW/km&sup2;. This mapping does not apply
-                    exclusions to farmland, as onshore wind can be
-                    deployed alongside agriculture. Another major exclusion not accounted for is potential interference
-                    with radar
+                    <strong>Note:</strong> This mapping does not apply exclusions to farmland, as onshore wind can be
+                    deployed alongside agriculture. Another major exclusion not accounted for is interference with radar
                     systems.
                 </div>
 
@@ -419,16 +425,7 @@
         <div class="panel" id="chart-container">
             <h2>Exclusion effects</h2>
             <div class="selected-zone">Selected: <strong id="selected-zone-name">All UK</strong></div>
-            <div class="capacity-row">
-                <div class="capacity-box">
-                    <div class="capacity-label">Available capacity</div>
-                    <div class="capacity-display available"><span id="capacity-value">0</span> GW</div>
-                </div>
-                <div class="capacity-box">
-                    <div class="capacity-label">Current capacity</div>
-                    <div class="capacity-display current"><span id="current-capacity-value">0</span> GW</div>
-                </div>
-            </div>
+            <div class="capacity-display"><span id="capacity-value">0</span> GW</div>
             <div id="waterfall-chart"></div>
         </div>
 
@@ -457,7 +454,7 @@
                     <label>Landscape Protection</label>
                     <div class="radio-group">
                         <div class="radio-option">
-                            <input type="radio" name="landscape" id="land-1" value="1">
+                            <input type="radio" name="landscape" id="land-1" value="1" checked>
                             <label for="land-1">Level 1: No protections</label>
                         </div>
                         <div class="radio-option">
@@ -469,7 +466,7 @@
                             <label for="land-3">Level 3: + AONBs</label>
                         </div>
                         <div class="radio-option">
-                            <input type="radio" name="landscape" id="land-4" value="4" checked>
+                            <input type="radio" name="landscape" id="land-4" value="4">
                             <label for="land-4">Level 4: + Green Belt</label>
                         </div>
                     </div>
@@ -508,6 +505,8 @@
                 </div>
             </div>
 
+            <button id="apply-btn">Apply Options</button>
+
             <div class="legend">
                 <div>
                     <div class="legend-title">Capacity (GW)</div>
@@ -528,13 +527,12 @@
         let selectedZone = null;
         let zonesData = null;
         let capacityData = null;
-        let currentCapacityData = null;
 
         // Currently applied options (only changes when Apply is clicked)
         let appliedOptions = {
             bio: 1,
             whs: 1,
-            land: 4,
+            land: 1,
             listed: 500,
             bld: 500
         };
@@ -599,19 +597,10 @@
             if (maxCapacity === 0) return '#f0f0f0';
             const ratio = Math.min(capacity / maxCapacity, 1);
 
-            // Color scale: light teal -> dark teal (higher capacity = more potential)
-            let r, g, b;
-            if (ratio < 0.5) {
-                const t = ratio * 2;
-                r = Math.round(224 + t * (38 - 224));
-                g = Math.round(242 + t * (166 - 242));
-                b = Math.round(241 + t * (154 - 241));
-            } else {
-                const t = (ratio - 0.5) * 2;
-                r = Math.round(38 + t * (0 - 38));
-                g = Math.round(166 + t * (77 - 166));
-                b = Math.round(154 + t * (64 - 154));
-            }
+            // Color scale: light red -> dark red (higher capacity = more potential)
+            const r = Math.round(254 - ratio * 32);
+            const g = Math.round(224 - ratio * 179);
+            const b = Math.round(210 - ratio * 172);
 
             return `rgb(${r}, ${g}, ${b})`;
         }
@@ -674,31 +663,13 @@
         // Load capacity data
         async function loadCapacityData() {
             try {
-                const [stepResponse, currentResponse] = await Promise.all([
-                    fetch('wind_outputs/zone_results/step_reductions.json'),
-                    fetch('wind_outputs/zone_results/current_capacity.json')
-                ]);
-                capacityData = await stepResponse.json();
-                currentCapacityData = await currentResponse.json();
+                const response = await fetch('outputs/zone_results/step_reductions.json');
+                capacityData = await response.json();
                 updateAll();
             } catch (error) {
                 console.error('Error loading capacity data:', error);
                 alert('Error loading capacity data.');
             }
-        }
-
-        // Get current capacity for selected zone or all zones
-        function getCurrentCapacity() {
-            if (!currentCapacityData) return 0;
-            if (selectedZone) {
-                return currentCapacityData[selectedZone] || 0;
-            }
-            // Sum all zones
-            let total = 0;
-            for (const zoneId in currentCapacityData) {
-                total += currentCapacityData[zoneId];
-            }
-            return total;
         }
 
         // Style function for zones
@@ -825,12 +796,12 @@
                 },
                 increasing: {
                     marker: {
-                        color: 'rgba(0, 150, 136, 0.8)'
+                        color: 'rgba(75, 192, 192, 0.8)'
                     }
                 },
                 totals: {
                     marker: {
-                        color: 'rgba(0, 150, 136, 0.8)'
+                        color: 'rgba(75, 192, 192, 0.8)'
                     }
                 }
             };
@@ -861,9 +832,8 @@
 
             Plotly.newPlot('waterfall-chart', [trace], layout, config);
 
-            // Update capacity displays
+            // Update capacity display
             document.getElementById('capacity-value').textContent = data[IDX.FINAL].toFixed(1);
-            document.getElementById('current-capacity-value').textContent = getCurrentCapacity().toFixed(1);
         }
 
         // Update map colors
@@ -885,35 +855,63 @@
             updateChart();
         }
 
-        // Apply current options and update display
-        function applyAndUpdate() {
-            appliedOptions = getCurrentUIOptions();
-            updateAll();
+        // Check if current UI options differ from applied options
+        function hasUnappliedChanges() {
+            const current = getCurrentUIOptions();
+            return current.bio !== appliedOptions.bio ||
+                current.whs !== appliedOptions.whs ||
+                current.land !== appliedOptions.land ||
+                current.listed !== appliedOptions.listed ||
+                current.bld !== appliedOptions.bld;
         }
 
-        // Handle building setback slider
+        // Update the visual state of the options container
+        function updateOptionsVisualState() {
+            const container = document.getElementById('options-container');
+            if (hasUnappliedChanges()) {
+                container.classList.add('has-changes');
+            } else {
+                container.classList.remove('has-changes');
+            }
+        }
+
+        // Handle building setback slider (just updates label, not the data)
         function setupSlider() {
             const slider = document.getElementById('building-setback');
             const valueDisplay = document.getElementById('building-value');
 
             slider.addEventListener('input', function () {
                 valueDisplay.textContent = `${buildingSetbackValues[this.value]}m`;
-                applyAndUpdate();
+                updateOptionsVisualState();
             });
         }
 
-        // Setup all option change listeners to auto-update
+        // Setup all option change listeners for visual feedback
         function setupOptionChangeListeners() {
             // Checkboxes
-            document.getElementById('biodiversity').addEventListener('change', applyAndUpdate);
-            document.getElementById('world-heritage').addEventListener('change', applyAndUpdate);
+            document.getElementById('biodiversity').addEventListener('change', updateOptionsVisualState);
+            document.getElementById('world-heritage').addEventListener('change', updateOptionsVisualState);
 
             // Radio buttons
             document.querySelectorAll('input[name="landscape"]').forEach(radio => {
-                radio.addEventListener('change', applyAndUpdate);
+                radio.addEventListener('change', updateOptionsVisualState);
             });
             document.querySelectorAll('input[name="listed"]').forEach(radio => {
-                radio.addEventListener('change', applyAndUpdate);
+                radio.addEventListener('change', updateOptionsVisualState);
+            });
+        }
+
+        // Setup Apply button
+        function setupApplyButton() {
+            document.getElementById('apply-btn').addEventListener('click', function () {
+                // Update applied options from current UI state
+                appliedOptions = getCurrentUIOptions();
+
+                // Update visual state (remove highlight)
+                updateOptionsVisualState();
+
+                // Now update everything with the new applied options
+                updateAll();
             });
         }
 
@@ -924,8 +922,12 @@
 
             function closeModal() {
                 modal.classList.add('hidden');
+                // Load capacity data and chart first
                 loadCapacityData();
-                initMap();
+                // Delay map loading by 0.5 seconds to let layout settle
+                setTimeout(function () {
+                    initMap();
+                }, 500);
             }
 
             closeBtn.addEventListener('click', closeModal);
@@ -943,6 +945,7 @@
             setupModal();
             setupSlider();
             setupOptionChangeListeners();
+            setupApplyButton();
             // Map and data loading happens after modal closes
         });
     </script>
