@@ -387,18 +387,17 @@
                     affected by policy decisions. The capacity includes existing and future onshore wind.</p>
 
                 <p>To find the baseline amount of onshore wind, the areas where onshore wind could never be built are
-                    removed. This excludes land based on low wind speeds, slope, proximity to airports and roads, and
-                    excludes all existing forest area. Public green spaces are also removed.</p>
+                    removed. This excludes land based on low wind speeds, slope, proximity to airports, roads, railways,
+                    and overhead power lines, and excludes all existing forest area. Public green spaces are also
+                    removed.</p>
 
                 <p>You can choose which other constraints to apply, with varying levels of restriction on biodiversity,
                     world heritage, landscape protections, and distance to listed buildings and any other building in
                     the UK.</p>
 
                 <div class="note">
-                    <strong>Note:</strong>This mapping assumes a density of 20 MW/km&sup2;. This mapping does not apply
-                    exclusions to farmland, as onshore wind can be
-                    deployed alongside agriculture. Another major exclusion not accounted for is potential interference
-                    with radar
+                    <strong>Note:</strong> This mapping does not apply exclusions to farmland, as onshore wind can be
+                    deployed alongside agriculture. Another major exclusion not accounted for is interference with radar
                     systems.
                 </div>
 
@@ -457,7 +456,7 @@
                     <label>Landscape Protection</label>
                     <div class="radio-group">
                         <div class="radio-option">
-                            <input type="radio" name="landscape" id="land-1" value="1">
+                            <input type="radio" name="landscape" id="land-1" value="1" checked>
                             <label for="land-1">Level 1: No protections</label>
                         </div>
                         <div class="radio-option">
@@ -469,7 +468,7 @@
                             <label for="land-3">Level 3: + AONBs</label>
                         </div>
                         <div class="radio-option">
-                            <input type="radio" name="landscape" id="land-4" value="4" checked>
+                            <input type="radio" name="landscape" id="land-4" value="4">
                             <label for="land-4">Level 4: + Green Belt</label>
                         </div>
                     </div>
@@ -534,7 +533,7 @@
         let appliedOptions = {
             bio: 1,
             whs: 1,
-            land: 4,
+            land: 1,
             listed: 500,
             bld: 500
         };
@@ -924,8 +923,12 @@
 
             function closeModal() {
                 modal.classList.add('hidden');
+                // Load capacity data and chart first
                 loadCapacityData();
-                initMap();
+                // Delay map loading by 0.5 seconds to let layout settle
+                setTimeout(function () {
+                    initMap();
+                }, 500);
             }
 
             closeBtn.addEventListener('click', closeModal);
