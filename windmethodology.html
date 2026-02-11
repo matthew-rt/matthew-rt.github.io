@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onshore Wind Methodology</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: #fafafa;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #2c5282;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #444;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        .key-params {
+            background: #e8f4f8;
+            border-left: 4px solid #2c5282;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .key-params p {
+            margin: 0.25rem 0;
+        }
+
+        .key-params strong {
+            color: #2c5282;
+        }
+
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .constraint-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .constraint-table th,
+        .constraint-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .constraint-table th {
+            background: #f7fafc;
+            font-weight: 600;
+            color: #2c5282;
+        }
+
+        .constraint-table tr:hover {
+            background: #f7fafc;
+        }
+
+        .levels {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            padding: 1rem;
+            margin: 0.5rem 0 1rem 0;
+        }
+
+        .levels p {
+            margin: 0.25rem 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            color: #2c5282;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .note {
+            background: #fffbeb;
+            border-left: 4px solid #d69e2e;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="index.html" class="back-link">&larr; Back to Wind Tradeoffs Tool</a>
+
+    <h1>Onshore Wind Methodology</h1>
+    <p class="subtitle">How we calculate potential wind capacity across the UK</p>
+
+    <div class="key-params">
+        <p><strong>Raster resolution:</strong> ~50m x 50m pixels (resampled from wind speed data)</p>
+        <p><strong>Power density assumption:</strong> 20 MW/km²</p>
+    </div>
+
+    <p>The wind tradeoffs tool shows the maximum possible land where onshore wind could be deployed, based on
+        geotechnical and safety constraints. This results in the headline total capacity number for each region.</p>
+
+    <h2>Geotechnical &amp; Safety Constraints</h2>
+    <p>These constraints are always applied and form the baseline available land:</p>
+
+    <table class="constraint-table">
+        <thead>
+            <tr>
+                <th>Constraint</th>
+                <th>Rule</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Wind speed</td>
+                <td>Any pixel with wind speed less than 6 m/s at 100m height excluded</td>
+            </tr>
+            <tr>
+                <td>Slope</td>
+                <td>Any pixel with slope greater than 15 degrees excluded</td>
+            </tr>
+            <tr>
+                <td>Airports</td>
+                <td>Any pixel within 2km of an airport excluded</td>
+            </tr>
+            <tr>
+                <td>Roads</td>
+                <td>Any pixel within 200m of a road excluded</td>
+            </tr>
+            <tr>
+                <td>Railways</td>
+                <td>Any pixel within 200m of a railway excluded</td>
+            </tr>
+            <tr>
+                <td>Overhead power lines</td>
+                <td>Any pixel within 200m of an overhead power line excluded</td>
+            </tr>
+            <tr>
+                <td>Waterways</td>
+                <td>All waterways excluded</td>
+            </tr>
+            <tr>
+                <td>Forest</td>
+                <td>All forest excluded, plus 50m buffer</td>
+            </tr>
+            <tr>
+                <td>Public green spaces</td>
+                <td>All public green spaces excluded</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Hard Constraints</h2>
+    <p>Users can toggle these constraints on or off:</p>
+
+    <h3>Biodiversity</h3>
+    <ul>
+        <li>All Ramsar sites, plus 2km buffer</li>
+        <li>All Special Protection Areas (SPAs), plus 2km buffer</li>
+        <li>All Sites of Special Scientific Interest (SSSIs)</li>
+        <li>All Special Areas of Conservation (SACs)</li>
+    </ul>
+
+    <h3>World Heritage Sites</h3>
+    <ul>
+        <li>All World Heritage sites excluded</li>
+    </ul>
+
+    <h2>Soft Constraints</h2>
+    <p>Users can select from several levels, where higher levels provide more protection:</p>
+
+    <h3>Landscape Protection</h3>
+    <div class="levels">
+        <p><strong>Level 1:</strong> No protections</p>
+        <p><strong>Level 2:</strong> National Parks protected</p>
+        <p><strong>Level 3:</strong> National Parks and Areas of Outstanding Natural Beauty protected</p>
+        <p><strong>Level 4:</strong> Green Belt also protected</p>
+    </div>
+
+    <h3>Listed Buildings</h3>
+    <div class="levels">
+        <p><strong>Level 1:</strong> 500m setback from listed buildings</p>
+        <p><strong>Level 2:</strong> 1000m setback from listed buildings</p>
+        <p><strong>Level 3:</strong> 1500m setback from listed buildings</p>
+    </div>
+
+    <h3>Building Setback</h3>
+    <div class="levels">
+        <p>Slider with levels: 250m, 500m, 750m, 1000m, 1250m</p>
+    </div>
+
+    <h2>Minimum Parcel Size</h2>
+    <p>A final constraint removes any parcel of land smaller than 50,000 m² (5 hectares). This ensures only viable
+        development sites are counted.</p>
+
+    <div class="note">
+        <strong>Note:</strong> With all the combinations of hard and soft constraints, 240 different scenarios are
+        pre-computed to enable real-time exploration in the tool.
+    </div>
+
+</body>
+
+</html>
