@@ -24,7 +24,7 @@
             display: grid;
             grid-template-columns: 1fr 400px;
             grid-template-rows: 1fr auto;
-            height: calc(100vh - 30px);
+            height: 100vh;
             gap: 10px;
             padding: 10px;
         }
@@ -373,19 +373,23 @@
             background: #00796b;
         }
 
-        footer {
-            text-align: center;
-            padding: 5px 10px;
+        .map-footer {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
             font-size: 13px;
-            color: #666;
+            z-index: 500;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 4px 10px;
+            border-radius: 4px;
         }
 
-        footer a {
+        .map-footer a {
             color: #009688;
             text-decoration: none;
         }
 
-        footer a:hover {
+        .map-footer a:hover {
             text-decoration: underline;
         }
     </style>
@@ -429,6 +433,7 @@
     <div class="container">
         <div id="map">
             <h1 class="page-title">Onshore wind total capacity</h1>
+            <div class="map-footer"><a href="windmethodology.html">Methodology</a></div>
         </div>
 
         <div class="panel" id="chart-container">
@@ -535,10 +540,6 @@
             </div>
         </div>
     </div>
-
-    <footer>
-        <a href="windmethodology.html">Methodology</a>
-    </footer>
 
     <script>
         // Application state
